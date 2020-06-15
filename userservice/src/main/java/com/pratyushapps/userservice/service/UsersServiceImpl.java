@@ -120,6 +120,9 @@ public class UsersServiceImpl implements UsersService {
 	}
 	@Override
 	public String postOrder(OrderModel orderModel) {
+		UserEntity userEntity = usersRepository.findByUserId(orderModel.getCustomerId());
+		if (userEntity == null)
+			throw new UsernameNotFoundException("User not found");
 
 		logger.info("Before calling order-ws Microservice");
 
